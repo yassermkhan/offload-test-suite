@@ -1,5 +1,12 @@
 // Definitions of DirectX features.
 
+#ifndef D3D_MOCK_DEFAULT
+#define D3D_MOCK_DEFAULT(Name, Value)
+#endif
+
+#ifndef D3D_MOCK_UNSUPPORTED
+#define D3D_MOCK_UNSUPPORTED(Name, Value)
+#endif
 
 #ifdef SHADER_MODEL_ENUM
 SHADER_MODEL_ENUM(SM_5_1, 5.1, 0x51)
@@ -46,10 +53,18 @@ VARIABLE_SHADING_RATE_TIER_ENUM(VRS_Tier2, Tier2, 2)
 
 #ifdef D3D_FEATURE_ENUM
 D3D_FEATURE_ENUM(directx::ShaderModel, HighestShaderModel)
+D3D_MOCK_DEFAULT(HighestShaderModel, directx::SM_6_9)
 D3D_FEATURE_ENUM(directx::RootSignature, HighestRootSignatureVersion)
+D3D_MOCK_DEFAULT(HighestRootSignatureVersion, directx::RootSig_v1_2)
 D3D_FEATURE_ENUM(directx::MeshShaderTier, MeshShaderTier)
+D3D_MOCK_DEFAULT(MeshShaderTier, directx::MeshShaderTier1)
+D3D_MOCK_UNSUPPORTED(MeshShaderTier, directx::MeshShaderNotSupported)
 D3D_FEATURE_ENUM(directx::RaytracingTier, RaytracingTier)
+D3D_MOCK_DEFAULT(RaytracingTier, directx::RT_1_2)
+D3D_MOCK_UNSUPPORTED(RaytracingTier, directx::RT_NotSupported)
 D3D_FEATURE_ENUM(directx::VariableShadingRateTier, VariableShadingRateTier)
+D3D_MOCK_DEFAULT(VariableShadingRateTier, directx::VRS_Tier2)
+D3D_MOCK_UNSUPPORTED(VariableShadingRateTier, directx::VRS_NotSupported)
 #undef D3D_FEATURE_ENUM
 #endif
 
@@ -68,8 +83,15 @@ D3D_FEATURE_BOOL(
 
 #ifdef D3D_FEATURE_UINT
 D3D_FEATURE_UINT(ResourceBindingTier)
+D3D_MOCK_DEFAULT(ResourceBindingTier, 3u)
 D3D_FEATURE_UINT(WaveLaneCountMin)
+D3D_MOCK_DEFAULT(WaveLaneCountMin, 4u)
 D3D_FEATURE_UINT(WaveLaneCountMax)
+D3D_MOCK_DEFAULT(WaveLaneCountMax, 128u)
 D3D_FEATURE_UINT(TotalLaneCount)
+D3D_MOCK_DEFAULT(TotalLaneCount, 128u)
 #undef D3D_FEATURE_UINT
 #endif
+
+#undef D3D_MOCK_DEFAULT
+#undef D3D_MOCK_UNSUPPORTED

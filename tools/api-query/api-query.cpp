@@ -9,6 +9,7 @@
 //
 //===----------------------------------------------------------------------===//
 
+#include "api-query-mock-helpers.h"
 #include "API/Capabilities.h"
 #include "API/Device.h"
 #include "llvm/Support/CommandLine.h"
@@ -27,7 +28,7 @@ int main(int ArgC, char **ArgV) {
   const ExitOnError ExitOnErr("api-query: error: ");
 
   const DeviceConfig Config;
-  auto DevicesOrErr = initializeDevices(Config);
+  auto DevicesOrErr = initializeQueryDevices(Config);
   if (!DevicesOrErr) {
     logAllUnhandledErrors(DevicesOrErr.takeError(), errs(),
                           "api-query: error: ");
